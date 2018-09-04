@@ -1,0 +1,44 @@
+# Deep Learning UDF for KSQL for Streaming Anomaly Detection of MQTT IoT Sensor Data
+
+This demo shows an Internet of Things (IoT) integration example using Apache Kafka + Kafka Connect + MQTT Connector + Sensor Data.
+
+This project does not include any source code as Kafka Connect allows integration with data sources and sinks just with configuration. 
+
+Example configuration and step-by-step guide can be found below.
+
+## Architecture: Sensor Data via MQTT Broker and Kafka Connect MQTT Connector to Kafka Cluster
+This project focuses on the integration of MQTT sensor data into Kafka via MQTT Broker and Kafka Connect for further processing:
+TODO RIGHT PICTURE
+
+![](pictures/MQTT_Proxy_Confluent_Cloud.png)
+
+As other option, you can also use Confluent MQTT Proxy to integrate IoT data from IoT devices directly withou the need for a MQTT Broker. See [Deep Learning UDF for KSQL for Streaming Anomaly Detection of MQTT IoT Sensor Data](https://github.com/kaiwaehner/ksql-udf-deep-learning-mqtt-iot)for an example and source code. 
+
+If you want to see the other part (integration with sink applications like Elasticsearch / Grafana), please take a look at the project "[KSQL for streaming IoT data](https://github.com/kaiwaehner/ksql-fork-with-deep-learning-function)", which shows how to realize the integration with ElasticSearch via Kafka Connect.
+
+## Source Code
+Here is the full configuration for the MQTT Connector: 
+TODO
+
+See more details in Confluent Docs: TODO
+
+
+
+## How to run it?
+
+### Requirements
+- Java 8
+- [Confluent Platform 5.0+](https://www.confluent.io/download/) (Confluent Enterprise if you want to use the Confluent MQTT Proxy, Confluent Open Source if you just want to run the KSQL UDF and send data via kafkacat instead of MQTT)
+- MQTT Client and Broker (this demo uses [Mosquitto](https://mosquitto.org/download/))
+- [Confluent MQTT Connector](https://www.confluent.io/connector/kafka-connect-mqtt/) (a Kafka Connect based source connector) - Very easy installation via Confluent Hub, just one command:
+
+                confluent-hub install confluentinc/kafka-connect-mqtt:1.0.0-preview
+- TODO optional MQTT.fx
+
+### Step-by-step demo
+Follow these steps to [configure the MQTT Connector, start all components, generate MQTT sensor data and consume it from a Kafka consumer](https://github.com/kaiwaehner/kafka-connect-iot-mqtt-connector-example/blob/master/live-demo-kafka-connect-iot-mqtt-connector.adoc).
+
+
+
+
+
