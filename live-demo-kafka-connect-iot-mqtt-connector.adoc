@@ -9,9 +9,16 @@ This script assumes that all components (Kafka, Connect, MQTT Broker) use defaul
 
 Configure MQTT Connector 
 
+/Users/kai.waehner/confluent-5.0.0/share/confluent-hub-components/confluentinc-kafka-connect-mqtt/etc/source-anonymous.properties
+
+
 [source,bash]
 ----
-TODO
+name=mqtt-source
+tasks.max=1
+connector.class=io.confluent.connect.mqtt.MqttSourceConnector
+mqtt.server.uri=tcp://127.0.0.1:32790
+mqtt.topics=temperature:.*temperature
 ----
 
 == Starting backend services
@@ -22,7 +29,7 @@ Start Kafka Connect and dependencies (Kafka, Zookeeper, Schema Registry):
 
 [source,bash]
 ----
-confluent start kafka-connect
+confluent start connect
 ----
 
 Create a topic for sensor reading: 
@@ -36,7 +43,7 @@ Start the MQTT Broker:
 
 [source,bash]
 ----
-todo
+brew services start mosquitto
 ----
 
 TODO Use other Confluent-CLI commands like
