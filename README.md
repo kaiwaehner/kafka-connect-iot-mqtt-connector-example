@@ -28,21 +28,19 @@ Here is the full configuration for the MQTT Connector for Kafka Connect's Standa
                 mqtt.topics=< Required Configuration >
 
 
-For distributed mode (not part of this demo), you can use the same configuration with REST API:
+For distributed mode, you can use the same configuration with REST API:
 
-                {
+                curl -s -X POST -H 'Content-Type: application/json' http://localhost:8083/connectors -d '{
+                    "name" : "mqtt-source",
                 "config" : {
-                    "name" : "MqttSourceConnector1",
                     "connector.class" : "io.confluent.connect.mqtt.MqttSourceConnector",
                     "tasks.max" : "1",
-                    "mqtt.server.uri" : "< Required Configuration >",
-                    "mqtt.topics" : "< Required Configuration >"
+                    "mqtt.server.uri" : "tcp://127.0.0.1:1883",
+                    "mqtt.topics" : "temperature",
+                    "kafka.topics" : "mqtt."
                 }
-                }
+                }'
 
-Use curl to post the configuration to one of the Kafka Connect Workers, e.g.:
-
-                curl -s -X POST -H 'Content-Type: application/json' --data @connector.json http://localhost:8083/connectors
 
 The documentation explains the [differences between standalone and distributed Kafka Connect mode](https://docs.confluent.io/current/connect/concepts.html#connect-concepts). In short: Standalone mode is the simplest mode, where a single process is responsible for executing all connectors and tasks. Distributed mode is used in most production scenarios and provides scalability and automatic fault tolerance for Kafka Connect.
 
