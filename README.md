@@ -10,9 +10,7 @@ Example configuration and step-by-step guide can be found below.
 
 This project focuses on the integration of MQTT sensor data into Kafka via MQTT Broker and Kafka Connect for further processing:
 
-TODO RIGHT PICTURE
-
-![](pictures/todo.png)
+![](pictures/Apache_Kafka_Connect_MQTT_Broker_Mosquitto_Integration.png)
 
 As alternative to using Kafka Connect, you can also leverage Confluent MQTT Proxy to integrate IoT data from IoT devices directly withou the need for a MQTT Broker. See [Deep Learning UDF for KSQL for Streaming Anomaly Detection of MQTT IoT Sensor Data](https://github.com/kaiwaehner/ksql-udf-deep-learning-mqtt-iot)for an example and source code. 
 
