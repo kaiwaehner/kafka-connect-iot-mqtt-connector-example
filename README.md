@@ -31,13 +31,13 @@ Here is the full configuration for the MQTT Connector for Kafka Connect's Standa
 For distributed mode, you can use the same configuration with REST API:
 
                 curl -s -X POST -H 'Content-Type: application/json' http://localhost:8083/connectors -d '{
-                    "name" : "mqtt-source",
+                    "name" : "< Required Configuration >",
                 "config" : {
                     "connector.class" : "io.confluent.connect.mqtt.MqttSourceConnector",
                     "tasks.max" : "1",
-                    "mqtt.server.uri" : "tcp://127.0.0.1:1883",
-                    "mqtt.topics" : "temperature",
-                    "kafka.topics" : "mqtt."
+                    "mqtt.server.uri" : "< Required Configuration >",
+                    "mqtt.topics" : "< Required Configuration >",
+                    "kafka.topics" : "< Required Configuration >"
                 }
                 }'
 
@@ -60,7 +60,7 @@ Confluent documentation contains more details about installing and using [Conflu
 - [Confluent MQTT Connector](https://www.confluent.io/connector/kafka-connect-mqtt/) (a Kafka Connect based connector to send and receive MQTT messages) - Very easy installation via Confluent Hub, just one command:
 
                 confluent-hub install confluentinc/kafka-connect-mqtt:1.0.0-preview
-- TODO optional MQTT.fx
+- Optional: [MQTT.fx](https://mqttfx.jensd.de/) (a nice, simple UI to test MQTT pub/sub; not required - just makes life more comfortable)
 
 ### Step-by-step demo
 Follow these steps to [configure the MQTT Connector, start all components, generate MQTT sensor data and consume it from a Kafka consumer](https://github.com/kaiwaehner/kafka-connect-iot-mqtt-connector-example/blob/master/live-demo-kafka-connect-iot-mqtt-connector.adoc).
