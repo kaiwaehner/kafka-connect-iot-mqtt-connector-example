@@ -27,7 +27,7 @@ msgNr=0
 PUBEXE="mosquitto_pub"
 HOST="0.0.0.0" 
 PORT=1883
-TOPIC="car/engine/temperature"
+TOPIC="temperature"
 QOS=2
 
 #Set log level for the script
