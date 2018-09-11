@@ -60,6 +60,9 @@ Confluent documentation contains more details about installing and using [Conflu
                 confluent-hub install confluentinc/kafka-connect-mqtt:1.0.0-preview
 - Optional: [MQTT.fx](https://mqttfx.jensd.de/) (a nice, simple UI to test MQTT pub/sub; not required - just makes life more comfortable)
 
+The code is developed and tested on Mac and Linux operating systems. As Kafka does not support and work well on Windows, this is not tested at all.
+
+
 ### Step-by-step demo
 Follow these steps to [configure the MQTT Connector, start all components, generate MQTT sensor data and consume it from a Kafka consumer](https://github.com/kaiwaehner/kafka-connect-iot-mqtt-connector-example/blob/master/live-demo-kafka-connect-iot-mqtt-connector.adoc).
 
