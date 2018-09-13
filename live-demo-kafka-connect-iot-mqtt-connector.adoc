@@ -109,7 +109,7 @@ Use a CLI tool such as `kafka-console-consumer` from the shell prompt to consume
 
 [source,bash]
 ----
-$ kafka-console-consumer --bootstrap-server localhost:9092 --topic mqtt.temperature --from-beginning
+$ kafka-console-consumer --bootstrap-server localhost:9092 --topic mqtt.temperature --property print.key=true --from-beginning
 99999,4.193955593608823
 99999,5.363750640274894
 99999,7.292092517069437
