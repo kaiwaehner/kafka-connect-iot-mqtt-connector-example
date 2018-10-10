@@ -16,6 +16,11 @@ As alternative to using Kafka Connect, you can also leverage Confluent MQTT Prox
 
 If you want to see the other part (integration with sink applications like Elasticsearch / Grafana), please take a look at the project "[KSQL for streaming IoT data](https://github.com/kaiwaehner/ksql-fork-with-deep-learning-function)", which shows how to realize the integration with ElasticSearch via Kafka Connect.
 
+## Live Demo Video - MQTT with Kafka Connect and MQTT Proxy
+If you want to see Apache Kafka / MQTT integration in a video, please check out the following 15min recording showing a demo my two Github examples:
+
+[![Apache Kafka + MQTT Integration](pictures/MQTT_Apache_Kafka_Integration_Confluent_Proxy_Connect.png)](https://www.youtube.com/watch?v=L38-6ilGeKE)
+
 ## Kafka Connect Configuration (No Source Code Needed!)
 Here is the full configuration for the MQTT Connector for Kafka Connect's Standalone mode, which we use with Confluent CLI for a local setup: 
 
