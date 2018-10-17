@@ -65,7 +65,21 @@ If you want to run Kafka Connect in distributed mode, you can do the following R
                     "mqtt.server.uri" : "tcp://127.0.0.1:1883",
                     "mqtt.topics" : "temperature",
                     "kafka.topics" : "mqtt."
-                }
+                    }
+                }'
+
+                curl -s -X POST -H 'Content-Type: application/json' http://localhost:8083/connectors -d '{
+                    "name" : "mqtt-source",
+                "config" : {
+                    "connector.class" : "io.confluent.connect.mqtt.MqttSourceConnector",
+                    "tasks.max" : "1",
+                    "mqtt.server.uri" : "tcp://127.0.0.1:1883",
+                    "mqtt.topics" : "temperature",
+                    "kafka.topics" : "mqtt.",
+                    "transforms":"filter",  
+                    "transforms.filter.type":"com.github.kaiwaehner.kafka.connect.smt.StringFilter",  
+                    "transforms.filter.topic.format":"fraud"
+                    }
                 }'
 
 Check if connector is loaded and status is 'RUNNING':
