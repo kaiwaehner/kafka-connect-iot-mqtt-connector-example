@@ -4,7 +4,7 @@ This demo shows an Internet of Things (IoT) integration example using Apache Kaf
 
 This project does not include any source code as Kafka Connect allows integration with data sources and sinks just with configuration. 
 
-Example configuration and step-by-step guide can be found below.
+Example configuration and step-by-step guide can be found below. If you want to find more details about Kafka + MQTT integration, take a look at my slides from Kafka Summit 2018 in San Francisco: [IoT Integration with MQTT and Apache Kafka](https://www.slideshare.net/KaiWaehner/iot-integration-with-mqtt-and-apache-kafka).
 
 ## Architecture: Sensor Data via MQTT Broker and Kafka Connect MQTT Connector to Kafka Cluster
 
