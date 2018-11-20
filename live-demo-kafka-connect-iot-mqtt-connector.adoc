@@ -5,34 +5,6 @@ Kai Waehner <kontakt@kai-waehner.de>
 
 This script assumes that all components (Zookeeper, Kafka, Connect, MQTT Broker) use default values.
 
-== Configuration
-
-Configure MQTT Connector properties file (for Kafka Connect standalone mode) `/Users/kai.waehner/confluent-5.0.0/share/confluent-hub-components/confluentinc-kafka-connect-mqtt/etc/source-anonymous.properties` with your values for 
-
-- MQTT Broker URL
-- MQTT Topic(s) to consume from (comma-separated list)
-- Kafka Topic Mapping (prefix)
-
-For example, if you want to consume the MQTT topics `temperature` and `humidity`, and you want the Kafka topics to be `mqtt.temperature` and `mqtt.humidity`, then do
-
-[source,bash]
-----
-    "mqtt.topics" : "temperature,humidity",
-    "kafka.topics" : "mqtt."
-----
-
-This needs to be done before you start Kafka Connect. Example:
-
-[source,bash]
-----
-name=mqtt-source
-tasks.max=1
-connector.class=io.confluent.connect.mqtt.MqttSourceConnector
-mqtt.server.uri=tcp://127.0.0.1:32790
-mqtt.topics=temperature
-kafka.topics=mqtt.
-----
-
 == Starting backend services
 
 Start the MQTT Broker and test publish / subscribe with 'dummy' topic: 
@@ -79,8 +51,6 @@ curl -s -X DELETE localhost:8083/connectors/mqtt-source
 confluent status connectors
 confluent status mqtt-source
 ----
-
-As alternative to a HTTP call, you could also configure a property file for standalone mode. However, as REST can also be used for one single instance (in distributed mode), I always use this option to configure Kafka Connect.
 
 Next, create a Kafka Topic for consuming the MQTT messages via the MQTT Connector (needs to be the same as in the Connector Config): 
 
@@ -185,4 +155,36 @@ vi /Users/kai.waehner/confluent-5.0.0/etc/kafka/connect-log4j.properties
 // Restart Kafka Connect worker
 confluent stop connect
 confluent start connect
+----
+
+
+
+== Configuration of Standalone Mode via Properties File
+
+As alternative to a HTTP call, you could also configure a property file for standalone mode. However, as REST can also be used for one single instance (in distributed mode), I always use this option to configure Kafka Connect. But here is some more information about using a property file instead of HTTP to configure Connect (in standalone mode).
+
+Configure MQTT Connector properties file (for Kafka Connect standalone mode) `/Users/kai.waehner/confluent-5.0.0/share/confluent-hub-components/confluentinc-kafka-connect-mqtt/etc/source-anonymous.properties` with your values for 
+
+- MQTT Broker URL
+- MQTT Topic(s) to consume from (comma-separated list)
+- Kafka Topic Mapping (prefix)
+
+For example, if you want to consume the MQTT topics `temperature` and `humidity`, and you want the Kafka topics to be `mqtt.temperature` and `mqtt.humidity`, then do
+
+[source,bash]
+----
+    "mqtt.topics" : "temperature,humidity",
+    "kafka.topics" : "mqtt."
+----
+
+This needs to be done before you start Kafka Connect. Example:
+
+[source,bash]
+----
+name=mqtt-source
+tasks.max=1
+connector.class=io.confluent.connect.mqtt.MqttSourceConnector
+mqtt.server.uri=tcp://127.0.0.1:32790
+mqtt.topics=temperature
+kafka.topics=mqtt.
 ----
