@@ -51,11 +51,9 @@ Start Kafka Connect and dependencies (Kafka, Zookeeper, Schema Registry):
 [source,bash]
 ----
 confluent start connect
-
-confluent load mqtt-source -d /Users/kai.waehner/confluent-5.0.0/share/confluent-hub-components/confluentinc-kafka-connect-mqtt/etc/source-anonymous.properties
 ----
 
-If you want to run Kafka Connect in distributed mode, you can do the following REST call without creating a property file (only possible when Connect is running):
+We use Kafka Connect in distributed mode via REST call (only possible when Connect is running):
 
                 curl -s -X POST -H 'Content-Type: application/json' http://localhost:8083/connectors -d '{
                     "name" : "mqtt-source",
@@ -65,20 +63,6 @@ If you want to run Kafka Connect in distributed mode, you can do the following R
                     "mqtt.server.uri" : "tcp://127.0.0.1:1883",
                     "mqtt.topics" : "temperature",
                     "kafka.topics" : "mqtt."
-                    }
-                }'
-
-                curl -s -X POST -H 'Content-Type: application/json' http://localhost:8083/connectors -d '{
-                    "name" : "mqtt-source",
-                "config" : {
-                    "connector.class" : "io.confluent.connect.mqtt.MqttSourceConnector",
-                    "tasks.max" : "1",
-                    "mqtt.server.uri" : "tcp://127.0.0.1:1883",
-                    "mqtt.topics" : "temperature",
-                    "kafka.topics" : "mqtt.",
-                    "transforms":"filter",  
-                    "transforms.filter.type":"com.github.kaiwaehner.kafka.connect.smt.StringFilter",  
-                    "transforms.filter.topic.format":"fraud"
                     }
                 }'
 
@@ -96,7 +80,9 @@ confluent status connectors
 confluent status mqtt-source
 ----
 
-Create a Kafka Topic for consuming the MQTT messages via the MQTT Connector (needs to be the same as in the Connector Config): 
+As alternative to a HTTP call, you could also configure a property file for standalone mode. However, as REST can also be used for one single instance (in distributed mode), I always use this option to configure Kafka Connect.
+
+Next, create a Kafka Topic for consuming the MQTT messages via the MQTT Connector (needs to be the same as in the Connector Config): 
 
 TODO: 
 There was a bug in MQTT Connector. If topic `mqtt.temperature` does not receive any messages, the mapping does not work and always use the default value `mqtt.`. Then use `mqtt.` for topic creation AND the kafka-consumer below instead! 
