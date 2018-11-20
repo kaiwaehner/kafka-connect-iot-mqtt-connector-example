@@ -38,6 +38,9 @@ We use Kafka Connect in distributed mode via REST call (only possible when Conne
                     }
                 }'
 
+Please note that "distributed mode" can also be used for one single Connect instance like when using Confluent CLI. You could also use standalone mode (see more details at the end of the file).
+
+== Check Status of Connector
 Check if connector is loaded and status is 'RUNNING':
 
 [source,bash]
@@ -155,6 +158,9 @@ vi /Users/kai.waehner/confluent-5.0.0/etc/kafka/connect-log4j.properties
 // Restart Kafka Connect worker
 confluent stop connect
 confluent start connect
+
+// Tail the Connect log:
+confluent log kafka -f
 ----
 
 
