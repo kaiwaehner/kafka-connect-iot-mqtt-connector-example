@@ -58,11 +58,11 @@ confluent status mqtt-source
 Next, create a Kafka Topic for consuming the MQTT messages via the MQTT Connector (needs to be the same as in the Connector Config): 
 
 TODO: 
-There was a bug in MQTT Connector. If topic `mqtt.temperature` does not receive any messages, the mapping does not work and always use the default value `mqtt.`. Then use `mqtt.` for topic creation AND the kafka-consumer below instead! 
+There is a bug in MQTT Connector (update coming in Dezember 2018, I will udpate this document then). Topic `mqtt.temperature` does not receive any messages, the mapping does not work and always use the default value `mqtt.`. Therefore always just use `mqtt.` for topic creation AND the kafka-consumer for now!  
 
 [source,bash]
 ----
-kafka-topics --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic mqtt.temperature
+kafka-topics --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic mqtt.
 ----
 
 
@@ -83,7 +83,7 @@ Use a CLI tool such as `kafka-console-consumer` from the shell prompt to consume
 
 [source,bash]
 ----
-$ kafka-console-consumer --bootstrap-server localhost:9092 --topic mqtt.temperature --property print.key=true --from-beginning
+$ kafka-console-consumer --bootstrap-server localhost:9092 --topic mqtt. --property print.key=true --from-beginning
 99999,4.193955593608823
 99999,5.363750640274894
 99999,7.292092517069437
