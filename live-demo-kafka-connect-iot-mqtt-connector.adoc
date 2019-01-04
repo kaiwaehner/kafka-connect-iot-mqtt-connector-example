@@ -1,7 +1,7 @@
 = Apache Kafka / Kafka Connect / MQTT / Mosquitto Live Demo
 
 Kai Waehner <kontakt@kai-waehner.de>
-10 Sept 2018
+04 Jan 2019
 
 This script assumes that all components (Zookeeper, Kafka, Connect, MQTT Broker) use default values.
 
@@ -34,7 +34,10 @@ We use Kafka Connect in distributed mode via REST call (only possible when Conne
                     "tasks.max" : "1",
                     "mqtt.server.uri" : "tcp://127.0.0.1:1883",
                     "mqtt.topics" : "temperature",
-                    "kafka.topics" : "mqtt."
+                    "kafka.topic" : "mqtt.temperature",
+                    "confluent.topic.bootstrap.servers": "localhost:9092",
+                    "confluent.topic.replication.factor": "1",
+                    "confluent.license":""
                     }
                 }'
 
@@ -62,7 +65,7 @@ There is a bug in MQTT Connector (update coming in Dezember 2018, I will udpate 
 
 [source,bash]
 ----
-kafka-topics --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic mqtt.
+kafka-topics --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic mqtt.temperature
 ----
 
 
@@ -83,7 +86,7 @@ Use a CLI tool such as `kafka-console-consumer` from the shell prompt to consume
 
 [source,bash]
 ----
-$ kafka-console-consumer --bootstrap-server localhost:9092 --topic mqtt. --property print.key=true --from-beginning
+$ kafka-console-consumer --bootstrap-server localhost:9092 --topic mqtt.temperature --property print.key=true --from-beginning
 99999,4.193955593608823
 99999,5.363750640274894
 99999,7.292092517069437
@@ -152,7 +155,7 @@ Default log level is ERROR. You can change to INFO or DEBUG.
 
 [source,bash]
 ----
-vi /Users/kai.waehner/confluent-5.0.0/etc/kafka/connect-log4j.properties
+vi /Users/kai.waehner/confluent-5.1.0/etc/kafka/connect-log4j.properties
 // => Change log level
 
 // Restart Kafka Connect worker
@@ -180,7 +183,7 @@ For example, if you want to consume the MQTT topics `temperature` and `humidity`
 [source,bash]
 ----
     "mqtt.topics" : "temperature,humidity",
-    "kafka.topics" : "mqtt."
+    "kafka.topics" : "mqtt.temperature"
 ----
 
 This needs to be done before you start Kafka Connect. Example:
@@ -192,5 +195,5 @@ tasks.max=1
 connector.class=io.confluent.connect.mqtt.MqttSourceConnector
 mqtt.server.uri=tcp://127.0.0.1:32790
 mqtt.topics=temperature
-kafka.topics=mqtt.
+kafka.topics=mqtt.temperature
 ----
