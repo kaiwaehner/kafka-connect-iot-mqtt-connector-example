@@ -45,12 +45,7 @@ For distributed mode, you can use the same configuration with REST API:
                 }'
 
 
-The documentation explains the [differences between standalone and distributed Kafka Connect mode](https://docs.confluent.io/current/connect/concepts.html#connect-concepts). In short: Standalone mode is the simplest mode, where a single process is responsible for executing all connectors and tasks. Distributed mode is used in most production scenarios and provides scalability and automatic fault tolerance for Kafka Connect.
-
-
-
-
-
+The documentation explains the [differences between standalone and distributed Kafka Connect mode](https://docs.confluent.io/current/connect/concepts.html#connect-concepts). In short: Standalone mode is the simplest mode, where a single process is responsible for executing all connectors and tasks. Distributed mode is used in most production scenarios and provides scalability and automatic fault tolerance for Kafka Connect. You can also use distributed mode for local development leveraging its advantages like a REST API even if you just have one single Connect instance (and you can scale it later easily without complex changes). We will use distributed mode in this project therefore.
 
 Confluent documentation contains more details about installing and using [Confluent's MQTT Connector](https://docs.confluent.io/current/connect/kafka-connect-mqtt).
 
@@ -62,13 +57,14 @@ Confluent documentation contains more details about installing and using [Conflu
 - MQTT Client and Broker (this demo uses [Mosquitto](https://mosquitto.org/download/))
 - [Confluent MQTT Connector](https://www.confluent.io/connector/kafka-connect-mqtt/) (a Kafka Connect based connector to send and receive MQTT messages) - Very easy installation via Confluent Hub, just one command:
 
-                confluent-hub install confluentinc/kafka-connect-mqtt:1.0.0-preview
+                confluent-hub install confluentinc/kafka-connect-mqtt:1.1.0-preview
+
 - Optional: [MQTT.fx](https://mqttfx.jensd.de/) (a nice, simple UI to test MQTT pub/sub; not required - just makes life more comfortable)
 
 The code is developed and tested on Mac and Linux operating systems. As Kafka does not support and work well on Windows, this is not tested at all.
 
-
 ### Step-by-step demo
+
 Follow these steps to [configure the MQTT Connector, start all components, generate MQTT sensor data and consume it from a Kafka consumer](https://github.com/kaiwaehner/kafka-connect-iot-mqtt-connector-example/blob/master/live-demo-kafka-connect-iot-mqtt-connector.adoc).
 
 
