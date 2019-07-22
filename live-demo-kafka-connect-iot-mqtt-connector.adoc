@@ -1,9 +1,12 @@
 = Apache Kafka / Kafka Connect / MQTT / Mosquitto Live Demo
 
 Kai Waehner <kontakt@kai-waehner.de>
-04 Jan 2019
+22 Jul 2019
 
 This script assumes that all components (Zookeeper, Kafka, Connect, MQTT Broker) use default values.
+
+Please note that Confluent CLI changed with Confluent Platform 5.3+: 'confluent local start'
+Confluent Platform 5.2 and earlier: 'confluent start'. This guide uses Confluent Platform 5.3.
 
 == Starting backend services
 
@@ -22,7 +25,7 @@ Start Kafka Connect and dependencies (Kafka, Zookeeper, Schema Registry):
 
 [source,bash]
 ----
-confluent start connect
+confluent local start connect 
 ----
 
 We use Kafka Connect in distributed mode via REST call (only possible when Connect is running):
@@ -54,18 +57,15 @@ curl -s "http://localhost:8083/connectors/mqtt-source/status"
 curl -s -X DELETE localhost:8083/connectors/mqtt-source
 
 // Confluent CLI
-confluent status connectors
-confluent status mqtt-source
+confluent local status connectors
+confluent local status mqtt-source
 ----
 
-Next, create a Kafka Topic for consuming the MQTT messages via the MQTT Connector (needs to be the same as in the Connector Config): 
-
-TODO: 
-There is a bug in MQTT Connector (update coming in Dezember 2018, I will udpate this document then). Topic `mqtt.temperature` does not receive any messages, the mapping does not work and always use the default value `mqtt.`. Therefore always just use `mqtt.` for topic creation AND the kafka-consumer for now!  
+Next, create a Kafka Topic for consuming the MQTT messages via the MQTT Connector (needs to be the same as in the Connector Config):  
 
 [source,bash]
 ----
-kafka-topics --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic mqtt.temperature
+kafka-topics --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic mqtt.temperature
 ----
 
 
@@ -123,7 +123,7 @@ Finally, stop the backend services:
 [source,bash]
 ----
 brew services stop mosquitto
-confluent destroy
+confluent local destroy
 ----
 
 == Errors? Problems?
@@ -159,11 +159,11 @@ vi /Users/kai.waehner/confluent-5.1.0/etc/kafka/connect-log4j.properties
 // => Change log level
 
 // Restart Kafka Connect worker
-confluent stop connect
-confluent start connect
+confluent local stop connect
+confluent local start connect
 
-// Tail the Connect log:
-confluent log kafka -f
+// Check the Connect log:
+confluent local log kafka
 ----
 
 
