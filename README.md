@@ -58,7 +58,7 @@ Confluent documentation contains more details about installing and using [Conflu
 - MQTT Client and Broker (this demo uses [Mosquitto](https://mosquitto.org/download/))
 - [Confluent MQTT Connector](https://www.confluent.io/connector/kafka-connect-mqtt/) (a Kafka Connect based connector to send and receive MQTT messages) - Very easy installation via Confluent Hub, just one command:
 
-                confluent-hub install confluentinc/kafka-connect-mqtt:1.1.0-preview
+                confluent-hub install confluentinc/kafka-connect-mqtt:1.2.3
 
 - Optional: [MQTT.fx](https://mqttfx.jensd.de/) (a nice, simple UI to test MQTT pub/sub; not required - just makes life more comfortable)
 
