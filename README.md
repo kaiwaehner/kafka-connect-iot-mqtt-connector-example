@@ -2,7 +2,7 @@
 
 This demo shows an Internet of Things (IoT) integration example using Apache Kafka + Kafka Connect + MQTT Connector + Sensor Data.
 
-This project does not include any source code as Kafka Connect allows integration with data sources and sinks just with configuration. 
+This project does not include any source code as Kafka Connect allows integration with data sources and sinks just with configuration.
 
 Example configuration and step-by-step guide can be found below. If you want to find more details about Kafka + MQTT integration, take a look at my slides from Kafka Summit 2018 in San Francisco: [IoT Integration with MQTT and Apache Kafka](https://www.slideshare.net/KaiWaehner/iot-integration-with-mqtt-and-apache-kafka). The video recording is available on the website of Kafka Summit for free: [Kafka MQTT Integration - Video Recording](https://www.confluent.io/kafka-summit-sf18/processing-iot-data-from-end-to-end).
 
@@ -12,7 +12,7 @@ This project focuses on the integration of MQTT sensor data into Kafka via MQTT 
 
 ![](pictures/Apache_Kafka_Connect_MQTT_Broker_Mosquitto_Integration.png)
 
-As alternative to using Kafka Connect, you can also leverage Confluent MQTT Proxy to integrate IoT data from IoT devices directly withou the need for a MQTT Broker. See [Deep Learning UDF for KSQL for Streaming Anomaly Detection of MQTT IoT Sensor Data](https://github.com/kaiwaehner/ksql-udf-deep-learning-mqtt-iot) for an example and source code. 
+As alternative to using Kafka Connect, you can also leverage Confluent MQTT Proxy to integrate IoT data from IoT devices directly withou the need for a MQTT Broker. See [Deep Learning UDF for KSQL for Streaming Anomaly Detection of MQTT IoT Sensor Data](https://github.com/kaiwaehner/ksql-udf-deep-learning-mqtt-iot) for an example and source code.
 
 If you want to see the other part (integration with sink applications like Elasticsearch / Grafana), please take a look at the project "[KSQL for streaming IoT data](https://github.com/kaiwaehner/ksql-fork-with-deep-learning-function)", which shows how to realize the integration with ElasticSearch via Kafka Connect.
 
