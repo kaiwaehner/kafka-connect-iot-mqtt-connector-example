@@ -6,7 +6,7 @@ Kai Waehner <kontakt@kai-waehner.de>
 This script assumes that all components (Zookeeper, Kafka, Connect, MQTT Broker) use default values.
 
 Please note that Confluent CLI changed with Confluent Platform 5.3+: 'confluent local start'
-Confluent Platform 5.2 and earlier: 'confluent start'. This guide uses Confluent Platform 5.3.
+Confluent Platform 5.2 and earlier: 'confluent start'. This guide is tested with Confluent Platform 5.4.0.
 
 == Starting backend services
 
@@ -28,7 +28,11 @@ Start Kafka Connect and dependencies (Kafka, Zookeeper, Schema Registry):
 confluent local start connect 
 ----
 
-We use Kafka Connect in distributed mode via REST call (only possible when Connect is running):
+== Create and deploy MQTT Connector Instance
+
+We use Kafka Connect in distributed mode via REST call (only possible when Connect is running). This is highly recommend as you can do this for one single node (like in this example, but also deploy a distributed Connect cluster).
+
+Important: If you copy&paste the below curl command, make sure that you copy it "plaintext only". Otherwise, it might not work. On my Mac, I copy the command to a text editor first and from there to the command line to execute it. 
 
                 curl -s -X POST -H 'Content-Type: application/json' http://localhost:8083/connectors -d '{
                     "name" : "mqtt-source",
